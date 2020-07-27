@@ -7,5 +7,6 @@ export default defineConfig({
   routes: [
     { path: '/', component: '@/pages/index' },
     { path: '/mock', component: '@/pages/mock' },
+    { path: '/use_effect', component: '@/pages/use_effect' },
   ],
 });
