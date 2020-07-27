@@ -2,17 +2,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 export default () => {
-  const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
-  const [search, setSearch] = useState('redux');
+  const [data, setData] = useState({ hits: [] });      // 请求接口获取数据保存
+  const [query, setQuery] = useState('redux');         // 查询参数
+  const [search, setSearch] = useState('redux');       // 处理频繁触发加载的问题
   const [isLoading, setIsLoading] = useState(false);   // 加载中
+  const [isError, setIsError] = useState(false);       // 处理错误异常
   useEffect(() => {
     const fetchData = async () => {
+      setIsError(false);
       setIsLoading(true);
-      const result = await axios(
-        `http://hn.algolia.com/api/v1/search?query=${search}`,
-      );
-      setData(result.data);
+      try {
+        const result = await axios(
+          `http://hn.algolia.com/api/v1/search?query=${search}`,
+        );
+        setData(result.data);
+      } catch (error) {
+        setIsError(true)
+      }
+
       setIsLoading(false);
     };
 
@@ -25,6 +32,9 @@ export default () => {
       <button type="button" onClick={() => setSearch(query)}>
         Search
       </button>
+      {/* error处理 */}
+      {isError && <div>Something went wrong ...</div>}
+      {/* 加载中动画处理 */}
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
