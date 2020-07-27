@@ -19,19 +19,23 @@ export default () => {
       } catch (error) {
         setIsError(true)
       }
-
       setIsLoading(false);
     };
 
     fetchData();
-  }, [search])   // 依赖了query这个变量的,因此需要传入query
+  }, [search]);   // 依赖了query这个变量的,因此需要传入query
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSearch(query)
+  }
   return (
     <>
       <h2>use Effect请求数据</h2>
-      <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
-      <button type="button" onClick={() => setSearch(query)}>
-        Search
-      </button>
+      <form onSubmit={onSubmit}>
+        <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
+        <button type="submit">搜索</button>
+      </form>
+
       {/* error处理 */}
       {isError && <div>Something went wrong ...</div>}
       {/* 加载中动画处理 */}
