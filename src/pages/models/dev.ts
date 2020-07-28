@@ -22,9 +22,7 @@ const devModel: devModelType = {
   },
   effects: {
     *getList({ payload, callback }, { put, call }) {
-      console.log('请求前：');
       const response = yield call(getList, payload);
-      console.log('请求后:', response.data.data);
       yield put({
         type: 'listInfo',
         payload: response.data.data,
@@ -33,7 +31,7 @@ const devModel: devModelType = {
   },
   reducers: {
     listInfo(state, action) {
-      console.log('reducer:', state);
+      console.log('reducer:', action);
       return {
         ...state,
         list: action.payload,

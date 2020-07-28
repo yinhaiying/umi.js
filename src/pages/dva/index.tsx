@@ -11,7 +11,6 @@ const IndexPage: FC<PageProps> = ({ dev, dispatch }) => {
   const { list } = dev;
   useEffect(() => {
     dispatch({ type: 'dev/getList' });
-    console.log('测试2list:', list);
   }, []);
   return (
     <>
