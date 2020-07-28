@@ -9,5 +9,6 @@ export default defineConfig({
     { path: '/mock', component: '@/pages/mock' },
     { path: '/use_effect', component: '@/pages/use_effect' },
     { path: '/use_reducer', component: '@/pages/use_reducer' },
+    { path: '/dva', component: '@/pages/dva' },
   ],
 });
